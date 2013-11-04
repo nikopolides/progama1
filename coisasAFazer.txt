@@ -1,0 +1,82 @@
+/*
+
+Continuar arrumando o sintatico CONDICIONAIS
+Compreender como funciona 
+	O inicio e fim do comando (tal como a main e as chaves que encerra lah embaixo)
+
+
+
+
+
+
+
+
+
+
+//OLD
+vetor xpto de 5 inteiros
+
+vetor: 
+	"vetor" SIMBOLO "de" NUMERO tipo
+
+tipo:
+	INTEIRO | REAL | CARACTERE | LOGICO
+
+
+
+inteiro vet[5]
+
+vetor:
+	tipo IDENTIFICADOR "[" inteiro "]"
+tipo:
+	inteiro | REAL | CARACTERE | LOGICO
+
+
+ponteiro indefinido p
+(inteiro) p
+
+int x;
+void *x;
+
+ponteiro "ponteiro"
+ponteiro inteiro *p;
+*/
+
+
+"inteiro" return(INTEIRO);
+"real" return(REAL);
+"caractere" return(CARACTERE);
+"logico" return(LOGICO);
+"ponteiro" return(PONTEIRO);
+
+{real} { 
+	yylval=atof(yytext); 
+	return(REAL);
+}
+
+
+   | Expressao MAIS Expressao { $$=$1+$3; }
+   | Expressao MENOS Expressao { $$=$1-$3; }
+   | Expressao ASTERISCO Expressao { $$=$1*$3; }
+   | Expressao BARRA Expressao { $$=$1/$3; }
+   | Expressao POTENCIA Expressao { $$=pow($1,$3); }
+   | PARENTESIS_ESQUERDO Expressao PARENTESIS_DIREITO { $$=$2; }
+
+   | Expressao FIM_LINHA { printf("Resultado: %f\n",$1); }
+
+/*
+{identacao} { 
+	buffer = strcat("\t",yytext);	
+	return(IDENTACAO);
+}
+*/
+
+
+"%" return(PORCENTAGEM);
+
+
+
+
+
+Fazer função contador de linha e /t
+fazer função geral para verificação de tipos
